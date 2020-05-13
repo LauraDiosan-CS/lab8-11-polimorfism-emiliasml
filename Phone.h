@@ -1,34 +1,33 @@
 #pragma once
 
-// Telefon(numeProducator, numeModel,
-//unitatiProduse, listaOperatoriGSMCompatibili)
+// Telefon(listaOperatoriGSMCompatibili)
 #include <iostream>
-#include <list>
+#include <vector>
 #include <string>
+#include <sstream>
+#include "Series.h"
+#include "Utils.h"
 using namespace std;
 
-class Phone {
-protected:
-	//char* producer;
-	//char* model;
-	//int nr;
-	list <int> operators;
+class Phone: public Series{
+private:
+	vector <string> operators;
 public:
 	Phone();
-	Phone(char*, char*, int, list<int>);
-	Phone(const Phone&);
-	Phone(string);
-	//char* getProducer();
-	//char* getModel();
-	//int getNr();
-	list <int> getOperators();
-	//void setProducer(const char*);
-	//void setModel(const char*);
-	//void setNr(int);
-	void setOperators(list<int>);
+	Phone(string p, string m, int n, vector<string> op);
+	Phone(const Phone& p);
+	~Phone();
+	Phone(string linie, char delim);
+	Series* clone();
+
+	//setter and getter
+	vector <string> getOperators();
+	void setOperators(vector<string>);
+
+	string toString();
+	string toStringDelimiter(string delim);
 	Phone& operator=(const Phone&);
 	bool operator==(const Phone&);
-	~Phone();
 	friend ostream& operator<<(ostream& os, Phone p);
 	friend istream& operator>>(istream& is, Phone& p);
 
